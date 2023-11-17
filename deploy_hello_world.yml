@@ -1,0 +1,25 @@
+---
+ - name: deploying helloworld
+   hosts: server
+   become: yes
+
+   tasks: 
+   - name: install docker
+     apt:
+      name: docker
+      state: present
+        
+   - name: installpython
+     apt:
+      name: python3
+      state: present
+             
+   - name: build docker
+     command : docker build -t website /home/devasc/ansible-project/
+
+
+   - name: run docker  
+     command: docker run -t -d -p 8081:80 --name MYWEBSITE website
+     
+     
+   
